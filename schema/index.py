@@ -1,1 +1,1 @@
-from schema.user import Products
+from schema.user import Product

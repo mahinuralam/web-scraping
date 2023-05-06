@@ -2,11 +2,11 @@
 from fastapi import FastAPI
 
 from config.utils import create_db_tables
-from routes.index import user_router
+from routes.index import product_router
 
 app = FastAPI(title = "FASTAPI")
 
-app.include_router(user_router)
+app.include_router(product_router)
 
 attendance_data = None
 

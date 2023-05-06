@@ -1,10 +1,9 @@
-from datetime import datetime
+from typing import List
 
 from pydantic import BaseModel
 
 
-class Products(BaseModel):
-    name : str
-    price : int
-    url: str
+class Product(BaseModel):
+     name : List[str]
+    
     
