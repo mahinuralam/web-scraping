@@ -1,0 +1,14 @@
+
+DB_DEFAULT_NAME=postgres
+DB_USER=postgres
+DB_PASSWORD=password
+
+DB_HOST=host.docker.internal
+DB_PORT=5432
+ORM_NAME=postgresql
+ORM_DRIVER=psycopg2
+DB_AMS=testdb
+
+FAPI_HOST=localhost
+FAPI_PORT=8000
+
