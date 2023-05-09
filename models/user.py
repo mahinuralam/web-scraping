@@ -7,8 +7,9 @@ from config.db import Base, meta
 class Products(Base):
     __tablename__ = "products"
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
-    price = Column(Integer)
+    details = Column(String)
+    price = Column(String)
+    span_value = Column(String)
     url = Column(String)
     created_at=Column(DateTime(timezone=True), default=func.now())
     updated_at=Column(DateTime(timezone=True), onupdate=func.now())

@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 chromedriver_path = '/Users/prismerp/Documents/personal/chromedriver_mac64/chromedriver'
 import time
 
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -51,16 +52,30 @@ async def callscript(product_name):
             elementsss = result.find_elements(By.CLASS_NAME,'s-widget-container-height-small')
             for element in elementsss:
                 try:
-                    product_details = element.find_element(By.CLASS_NAME,'a-size-medium').text
+                    try:
+                        product_element = element.find_element(By.CLASS_NAME,'a-size-medium')
+                        product_details = product_element.text
+                    except NoSuchElementException:
+                        product_details = ""
                     # print("A -> ",product_details)
-                    product_price = element.find_element(By.CLASS_NAME, 'a-price').text
+                    try:
+                        price_element = element.find_element(By.CSS_SELECTOR, '.a-price')
+                        product_price = price_element.text
+                    except NoSuchElementException:
+                        product_price = ""
                     # print("S -> ", product_price)
-                    nested_span = element.find_element(By.CLASS_NAME, 'a-size-base')
-                    span_value = nested_span.text
+                    try:
+                        nested_span = element.find_element(By.CLASS_NAME, 'a-size-base')
+                        span_value = nested_span.text
+                    except NoSuchElementException:
+                        span_value = ""
                     # print("D -> ", span_value)
-                    product_link = result.find_element(By.CSS_SELECTOR, 'h2 a').get_attribute('href')
+                    try:
+                        product_element = result.find_element(By.CSS_SELECTOR, 'h2 a').get_attribute('href')
+                        product_link = product_element.text
+                    except NoSuchElementException:
+                        product_link = ""
                     # print("F -> ", product_link)
-                    temp = {}
                     temp = {
                         'details': product_details,
                         'price': product_price,
@@ -69,12 +84,12 @@ async def callscript(product_name):
                     }
                     # print("TEMP --> ", temp)
                     product_map.update(temp)
-                except:
-                    print("NOT FOUND")
+                except Exception as e:
+                    print("NOT FOUND", str(e))
                     pass
 
         except Exception as e:
-            print("No rating found",e)
+            print("No rating found",str(e))
 
     print(" BEFORE ----")
     

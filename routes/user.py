@@ -38,20 +38,22 @@ async def write_product(product : List[Product]):
         for name in item.name:
             print("ITEM ----> ", name)
             products = await callscript(name)
-    print("PRODUCTS ---- > ", products)
-    return products
-    try:
-        product_data = Products(
-            name = product.name,
-        )
-        session.add(product_data)
-        session.commit()
-        session.refresh(product_data)
-        return session.query(Products).filter_by(id=product_data.id).first()
-    except Exception as e:
-        print(e) 
-        session.rollback()
-        return []
+            print("PRODUCTS ---- > ", products)
+            try:
+                product_data = Products(
+                    details = products.details,
+                    price = products.price,
+                    span_value = products.span_value,
+                    url = products.url
+                )
+                session.add(product_data)
+                session.commit()
+                session.refresh(product_data)
+            except Exception as e:
+                print("EXCEPTION eee -) ", str(e))
+                session.rollback()
+                return []
+    
 
 
 
