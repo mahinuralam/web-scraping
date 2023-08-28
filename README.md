@@ -1,4 +1,4 @@
-# aiw-web-scraping
+# web-scraping
 
 A web scraping project.
 
