@@ -23,7 +23,7 @@ ALTER USER postgres PASSWORD 'abcd';
 ```
 - Run the server with univorn
 ```bash
-uvicorn app:app --port 8000 --reload
+uvicorn app:app --port 8010 --reload
 ```
 - Run the server with docker
 ```bash
